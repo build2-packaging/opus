@@ -22,7 +22,7 @@ else
 
 if ($c.target.class == 'windows')
 {
-    objs{**}: c.poptions += "-DDLL_EXPORT"
+    objs{**}: c.poptions += "-DDLL_EXPORT" "-DWIN32"
 }
 else
 {
