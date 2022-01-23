@@ -31,6 +31,7 @@ else
 }
 
 lib{opus}: \
+    include/h{*} \
     src/{h c}{* -opus_demo -repacketizer_demo -opus_compare} \
     silk/float/{h c}{*} \
     silk/x86/{h c}{*} \
