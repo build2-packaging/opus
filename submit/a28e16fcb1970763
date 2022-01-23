@@ -1,0 +1,6 @@
+: 1
+name: opus
+version: 1.3.1
+summary: Opus is a codec for interactive speech and audio transmission over\
+ the Internet.
+license: BSD-3-Clause
