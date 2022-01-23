@@ -1,0 +1,50 @@
+c.poptions = \
+    "-DOPUS_X86_MAY_HAVE_SSE" \
+    "-DOPUS_X86_MAY_HAVE_SSE2" \
+    "-DOPUS_X86_MAY_HAVE_SSE4_1" \
+    "-DOPUS_HAVE_RTCD" \
+    "-DOPUS_BUILD" \
+    "-DENABLE_HARDENING" \
+    "-I$src_base" \
+    "-I$src_base/celt" \
+    "-I$src_base/silk" \
+    "-I$src_base/silk/float" \
+    "-I$src_base/include"
+
+if ($c.id == 'msvc')
+{
+    c.poptions += "-DUSE_ALLOCA"
+}
+else
+{
+    c.poptions += "-DVAR_ARRAYS" "-msse4.1"
+}
+
+if ($c.target.class == 'windows')
+{
+    objs{**}: c.poptions += "-DDLL_EXPORT"
+}
+else
+{
+    c.libs += "-lm"
+    objs{**}: c.coptions += "-fvisibility=hidden"
+}
+
+lib{opus}: \
+    src/{h c}{* -opus_demo -repacketizer_demo -opus_compare} \
+    silk/float/{h c}{*} \
+    silk/x86/{h c}{*} \
+    silk/{h c}{*} \
+    celt/x86/{h c}{*} \
+    celt/{h c}{* -opus_custom_demo}
+{
+    cc.export.poptions = "-I$src_base/include"
+}
+
+h{**}: install = false
+
+include/h{*}:
+{
+    install = include/
+    install.subdirs = false
+}

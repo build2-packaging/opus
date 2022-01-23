@@ -1,0 +1,6 @@
+$out_root/
+{
+  include opus/
+}
+
+export $out_root/opus/$import.target

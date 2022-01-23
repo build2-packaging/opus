@@ -1,0 +1,4 @@
+import libs = opus%lib{opus}
+
+./: exe{test_decode}: tests/c{test_opus_decode} tests/h{test_opus_common} $libs
+./: exe{test_padding}: tests/c{test_opus_padding} tests/h{test_opus_common} $libs
